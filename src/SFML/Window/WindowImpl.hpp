@@ -239,6 +239,8 @@ public:
     ////////////////////////////////////////////////////////////
     bool createVulkanSurface(const VkInstance& instance, VkSurfaceKHR& surface, const VkAllocationCallbacks* allocator);
 
+    void setJoystickSensorEventsEnabled(bool enabled);
+
 protected:
 
     ////////////////////////////////////////////////////////////
@@ -287,6 +289,8 @@ private:
     Vector3f          m_sensorValue[Sensor::Count];                          //!< Previous value of the sensors
     float             m_joystickThreshold;                                   //!< Joystick threshold (minimum motion for "move" event to be generated)
     float             m_previousAxes[Joystick::Count][Joystick::AxisCount];  //!< Position of each axis last time a move event triggered, in range [-100, 100]
+
+    bool joystickSensorEventsEnabled = true;
 };
 
 } // namespace priv

@@ -142,8 +142,11 @@ bool WindowImpl::popEvent(Event& event, bool block)
     if (m_events.empty())
     {
         // Get events from the system
-        processJoystickEvents();
-        processSensorEvents();
+        if (joystickSensorEventsEnabled)
+        {
+            processJoystickEvents();
+            processSensorEvents();
+        }
         processEvents();
 
         // In blocking mode, we must process events until one is triggered
@@ -155,8 +158,11 @@ bool WindowImpl::popEvent(Event& event, bool block)
             while (m_events.empty())
             {
                 sleep(milliseconds(10));
-                processJoystickEvents();
-                processSensorEvents();
+                if (joystickSensorEventsEnabled)
+                {
+                    processJoystickEvents();
+                    processSensorEvents();
+                }
                 processEvents();
             }
         }
@@ -302,6 +308,11 @@ bool WindowImpl::createVulkanSurface(const VkInstance& instance, VkSurfaceKHR& s
     return VulkanImplType::createVulkanSurface(instance, getSystemHandle(), surface, allocator);
 
 #endif
+}
+
+void WindowImpl::setJoystickSensorEventsEnabled(bool enabled)
+{
+    joystickSensorEventsEnabled = enabled;
 }
 
 } // namespace priv
