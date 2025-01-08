@@ -380,4 +380,9 @@ void WindowBase::setFullscreenWindow(const WindowBase* window)
     WindowsBaseImpl::fullscreenWindow = window;
 }
 
+void WindowBase::setJoystickSensorEventsEnabled(bool enabled)
+{
+    m_impl->setJoystickSensorEventsEnabled(enabled);
+}
+
 } // namespace sf

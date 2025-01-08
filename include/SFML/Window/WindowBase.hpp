@@ -406,6 +406,8 @@ public:
     ////////////////////////////////////////////////////////////
     bool createVulkanSurface(const VkInstance& instance, VkSurfaceKHR& surface, const VkAllocationCallbacks* allocator = 0);
 
+    void setJoystickSensorEventsEnabled(bool enabled);
+
 protected:
 
     ////////////////////////////////////////////////////////////
